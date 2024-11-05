@@ -1,8 +1,8 @@
 services:
   my-app:
-    image: idror/my-jenkins-flask-cicdproject:latest
+    image: shashkist/drors-project  #drors-project #idror/my-jenkins-flask-cicdproject:latest
     ports:
-      - "5002:5000"
+      - "5053:5052"
     environment:
       - DB_HOST=mysql
       - DB_PORT=3306
@@ -12,7 +12,7 @@ services:
     depends_on:
       mysql:
         condition: service_healthy
-  
+    
   mysql:
     image: mysql:8.0
     environment:
@@ -20,11 +20,12 @@ services:
       MYSQL_DATABASE: mydatabase
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
-      interval: 30s
-      timeout: 10s
+      interval: 5s
+      timeout: 5s
       retries: 5  
     volumes:
       - mysql-data:/var/lib/mysql  
   
+
 volumes:
   mysql-data:
